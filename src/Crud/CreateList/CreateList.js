@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
-const CreateList = ({ CallbackDataObj, active, editUser }) => {
+const CreateList = ({ CallbackDataObj, active }) => {
   const userFormObj = {
     firstName: "",
     lastName: "",
-    age: null,
+    age: null,  
     income: null,
     id: null,
   };
 
-  const [formObj, setFormObj] = useState(editUser);
+  const [formObj, setFormObj] = useState(userFormObj);
 
   // console.log(formObj);
 

@@ -13,8 +13,7 @@ const usersData = [
 ];
 
 const Crud = () => {
-  const [dataList, setDataList] = useState(usersData);
-  const[editUser,setEditUser] = useState({})
+  const [dataList, setDataList] = useState(usersData); 
 
   // get total income of users
   const totalIncome = dataList.reduce(
@@ -28,12 +27,12 @@ const Crud = () => {
 
     findIndexItem === -1
       ? setDataList([...dataList, obj])
-      : alert("Id already exists in table");  
+      : alert("Id already exists in table");
   };
 
-  const editUserCallback = (item) =>{
-    setEditUser(item)
-  }
+  // const editUserCallback = (item) =>{
+  //   setEditUser(item)
+  // }
 
   const handleRemove = (id) => {
     if (window.confirm("Are you sure you want to delete?")) {
@@ -47,14 +46,13 @@ const Crud = () => {
       <div className="container">
         <div className="row">
           <div className="col">
-            <CreateList CallbackDataObj={CallbackDataObj} editUser={setEditUser}/>
+            <CreateList CallbackDataObj={CallbackDataObj} />
           </div>
           <div className="col">
             <ReadList
               data={dataList}
               totalIncome={totalIncome}
               handleRemove={handleRemove}
-              editUserCallback ={editUserCallback}
             />
           </div>
         </div>

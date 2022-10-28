@@ -1,10 +1,9 @@
 import React from "react";
 
-const ReadList = ({ data, totalIncome, handleRemove, editUserCallback }) => {
+const ReadList = ({ data, totalIncome, handleRemove }) => {
   // console.log("TotalSalary", totalSalary);
   // editHandler(data);
-  const editHandler = (item) => {
-    editUserCallback(item);
+  const editHandler = (item) => { 
     console.log(item);
   };
   return (
