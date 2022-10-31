@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
-const CreateList = ({ CallbackDataObj, active }) => {
+const CreateList = ({ CallbackDataObj, active, edit }) => {
   const userFormObj = {
     firstName: "",
     lastName: "",
-    age: null,  
+    age: null,
     income: null,
     id: null,
   };
 
-  const [formObj, setFormObj] = useState(userFormObj);
+  const [formObj, setFormObj] = useState(edit);
 
   // console.log(formObj);
 
@@ -42,7 +42,7 @@ const CreateList = ({ CallbackDataObj, active }) => {
 
   return (
     <div className="container">
-      <h2 className="mt-3"> {active ? "EditUser " : "CreateList"}</h2>
+      <h2 className="mt-3"> {active ? "edit " : "CreateList"}</h2>
 
       <div className="row mt-5">
         <div className="col-lg-10">
