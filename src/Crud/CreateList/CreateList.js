@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const CreateList = ({ CallbackDataObj, active, edit }) => {
+const CreateList = ({ CallbackDataObj, editobj, IsEdit, updateCallback }) => {
   const userFormObj = {
     firstName: "",
     lastName: "",
@@ -9,19 +9,21 @@ const CreateList = ({ CallbackDataObj, active, edit }) => {
     id: null,
   };
 
-  const [formObj, setFormObj] = useState(edit);
-
-  // console.log(formObj);
+  const [formObj, setFormObj] = useState(userFormObj);
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
-    setFormObj({
-      ...formObj,
-      [name]:
-        name === "firstName" || name === "lastName" ? value : parseInt(value),
-      // convert the string into number.
-    });
+    console.log(name, value);
+
+    // setFormObj({
+    //   ...formObj,
+    //   [name]:
+    //     name === "firstName" || name === "lastName" ? value : parseInt(value),
+    // });
   };
+  useEffect(() => {
+    setFormObj(editobj);
+  }, [editobj]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -33,20 +35,24 @@ const CreateList = ({ CallbackDataObj, active, edit }) => {
       formObj.income
     ) {
       CallbackDataObj(formObj);
-      // setActive();
+      setFormObj(userFormObj);
     } else {
       alert("fill the all fields");
     }
+  };
+  const updateHandler = (e) => {
+    e.preventDefault();
+    updateCallback(formObj);
     setFormObj(userFormObj);
   };
 
   return (
     <div className="container">
-      <h2 className="mt-3"> {active ? "edit " : "CreateList"}</h2>
+      <h2 className="mt-3"> {IsEdit ? "Update List" : "Create List"} </h2>
 
       <div className="row mt-5">
         <div className="col-lg-10">
-          <form onSubmit={submitHandler}>
+          <form onSubmit={IsEdit ? updateHandler : submitHandler}>
             <div className="form-group">
               <label htmlFor="">Id</label>
               <input
@@ -98,7 +104,7 @@ const CreateList = ({ CallbackDataObj, active, edit }) => {
               />
             </div>
             <button type="submit" className="btn btn-success form-control mt-2">
-              {active ? "Update User" : "Add User"}
+              {IsEdit ? "Update User" : "Add users"}
             </button>
           </form>
         </div>

@@ -1,16 +1,10 @@
 import React from "react";
 
-const ReadList = ({ data, totalIncome, handleRemove, editUserCallback }) => {
-  // console.log("TotalSalary", totalSalary);
-  // editHandler(data);
-  const editHandler = (item) => { 
-    console.log(item);
-    editUserCallback(item)
-  };
+const ReadList = ({ data, totalIncome, handleRemove, editHandler }) => {
   return (
     <div>
       {data == "" ? (
-        <h4 className="mt-5">...No Recors Found!</h4>
+        <h2 className="mt-5">...No Recors Found!</h2>
       ) : (
         <div>
           <h2 className="mt-3">ReadList</h2>
@@ -37,7 +31,7 @@ const ReadList = ({ data, totalIncome, handleRemove, editUserCallback }) => {
                     <td> {item.lastName} </td>
                     <td> {item.age} </td>
                     <td> {item.income} </td>
- 
+
                     <td>
                       <button
                         type="button"

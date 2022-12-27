@@ -14,16 +14,21 @@ const usersData = [
 
 const Crud = () => {
   const [dataList, setDataList] = useState(usersData);
-  const [edit, setedit] = useState();
+  const [IsEdit, setIsEdit] = useState(false);
 
-  // get total income of users
+  const [editobj, seteditobj] = useState({
+    id: "",
+    firstName: "",
+    lastName: "",
+    income: "",
+  });
+
   const totalIncome = dataList.reduce(
     (prevValue, currentValue) => prevValue + parseInt(currentValue.income),
     0
   );
 
   const CallbackDataObj = (obj) => {
-    // console.log(obj);
     const findIndexItem = dataList.findIndex((item) => item.id === obj.id);
 
     findIndexItem === -1
@@ -31,8 +36,10 @@ const Crud = () => {
       : alert("Id already exists in table");
   };
 
-  const editCallback = (item) => {
-    setedit(item);
+  const editHandler = (item) => {
+    console.log(item);
+    seteditobj(item);
+    setIsEdit(true);
   };
 
   const handleRemove = (id) => {
@@ -41,20 +48,31 @@ const Crud = () => {
       setDataList(newDataList);
     }
   };
+  const updateCallback = (updatedItem) => {
+    setDataList(
+      dataList.map((item) => (item.id === updatedItem.id ? updatedItem : item))
+    );
+    setIsEdit(false);
+  };
 
   return (
     <div className="Crud">
       <div className="container">
         <div className="row">
           <div className="col">
-            <CreateList CallbackDataObj={CallbackDataObj} edit={edit} />
+            <CreateList
+              CallbackDataObj={CallbackDataObj}
+              editobj={editobj}
+              IsEdit={IsEdit}
+              updateCallback={updateCallback}
+            />
           </div>
           <div className="col">
             <ReadList
               data={dataList}
               totalIncome={totalIncome}
               handleRemove={handleRemove}
-              editCallback={editCallback}
+              editHandler={editHandler}
             />
           </div>
         </div>
